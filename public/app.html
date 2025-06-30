@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мессенджер | Чат</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Боковая панель -->
+        <div class="sidebar">
+            <div class="profile">
+                <img id="user-avatar" src="" alt="Аватар">
+                <span id="user-name"></span>
+            </div>
+            <input type="text" id="search-input" placeholder="Поиск...">
+            <div class="contacts" id="contacts-list"></div>
+        </div>
+
+        <!-- Область чата -->
+        <div class="chat">
+            <div class="chat-header">
+                <img id="contact-avatar" src="" alt="Аватар">
+                <span id="contact-name"></span>
+                <span id="contact-status"></span>
+            </div>
+            <div class="messages" id="messages-container"></div>
+            <div class="message-input">
+                <button id="attach-btn">📎</button>
+                <input type="file" id="file-input" hidden>
+                <input type="text" id="message-input" placeholder="Сообщение...">
+                <button id="send-btn">Отправить</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Socket.IO клиент -->
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>

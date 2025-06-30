@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мессенджер | Вход</title>
+    <style>
+        :root {
+            --primary-color: #4285f4;
+            --dark-color: #2c3e50;
+            --light-color: #ecf0f1;
+            --danger-color: #e74c3c;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: var(--light-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .auth-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            overflow: hidden;
+        }
+        
+        .tabs {
+            display: flex;
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 15px;
+            text-align: center;
+            background: #f1f1f1;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .auth-form {
+            padding: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .auth-form input {
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+        
+        .auth-form input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+        }
+        
+        .auth-form button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .auth-form button:hover {
+            background-color: #3367d6;
+        }
+        
+        .upload-btn {
+            display: block;
+            padding: 10px;
+            background: #f1f1f1;
+            border-radius: 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        
+        .upload-btn:hover {
+            background: #e1e1e1;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .error-message {
+            color: var(--danger-color);
+            text-align: center;
+            margin-top: -15px;
+            font-size: 14px;
+        }
+        
+        @media (max-width: 480px) {
+            .auth-form {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="auth-container">
+        <div class="tabs">
+            <button class="tab active" data-tab="login">Вход</button>
+            <button class="tab" data-tab="register">Регистрация</button>
+        </div>
+
+        <!-- Форма входа -->
+        <form id="login-form" class="auth-form">
+            <input type="text" id="login-nickname" placeholder="Никнейм" required>
+            <input type="password" id="login-password" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+            <div id="login-error" class="error-message hidden"></div>
+        </form>
+
+        <!-- Форма регистрации -->
+        <form id="register-form" class="auth-form hidden">
+            <input type="text" id="register-nickname" placeholder="Никнейм" required minlength="3">
+            <input type="email" id="register-email" placeholder="Email" required>
+            <input type="password" id="register-password" placeholder="Пароль" required minlength="6">
+            <label for="avatar-upload" class="upload-btn">Выбрать аватар</label>
+            <input type="file" id="avatar-upload" accept="image/*" hidden>
+            <button type="submit">Создать аккаунт</button>
+            <div id="register-error" class="error-message hidden"></div>
+        </form>
+    </div>
+
+    <script>
+        // Переключение между вкладками
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                if (tab.dataset.tab === 'login') {
+                    document.getElementById('login-form').classList.remove('hidden');
+                    document.getElementById('register-form').classList.add('hidden');
+                } else {
+                    document.getElementById('register-form').classList.remove('hidden');
+                    document.getElementById('login-form').classList.add('hidden');
+                }
+            });
+        });
+
+        // Обработка входа
+        document.getElementById('login-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const nickname = document.getElementById('login-nickname').value;
+            const password = document.getElementById('login-password').value;
+            const errorElement = document.getElementById('login-error');
+            
+            try {
+                // Здесь должна быть проверка на GitHub Pages
+                // В демо-версии просто сохраняем "пользователя"
+                localStorage.setItem('currentUser', JSON.stringify({
+                    id: 'demo-user',
+                    nickname: nickname,
+                    avatar: 'https://i.imgur.com/JqTk8bL.png'
+                }));
+                
+                // Перенаправляем в чат
+                window.location.href = 'app.html';
+            } catch (error) {
+                errorElement.textContent = 'Ошибка входа. Проверьте данные.';
+                errorElement.classList.remove('hidden');
+            }
+        });
+
+        // Обработка регистрации (демо-версия)
+        document.getElementById('register-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const errorElement = document.getElementById('register-error');
+            
+            // В демо-версии просто сохраняем данные
+            localStorage.setItem('currentUser', JSON.stringify({
+                id: 'demo-' + Date.now(),
+                nickname: document.getElementById('register-nickname').value,
+                avatar: 'https://i.imgur.com/JqTk8bL.png'
+            }));
+            
+            // Перенаправляем в чат
+            window.location.href = 'app.html';
+        });
+    </script>
+</body>
+</html>
