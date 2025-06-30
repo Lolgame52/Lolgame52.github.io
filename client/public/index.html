@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Мессенджер | Вход</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="tabs">
+            <button class="tab active" data-tab="login">Вход</button>
+            <button class="tab" data-tab="register">Регистрация</button>
+        </div>
+
+        <!-- Форма входа -->
+        <form id="login-form" class="auth-form">
+            <input type="text" placeholder="Никнейм" required>
+            <input type="password" placeholder="Пароль" required>
+            <button type="submit">Войти</button>
+        </form>
+
+        <!-- Форма регистрации -->
+        <form id="register-form" class="auth-form hidden">
+            <input type="text" placeholder="Никнейм" required>
+            <input type="email" placeholder="Email" required>
+            <input type="password" placeholder="Пароль" required>
+            <label for="avatar-upload" class="upload-btn">Выбрать аватар</label>
+            <input type="file" id="avatar-upload" accept="image/*" hidden>
+            <button type="submit">Создать аккаунт</button>
+        </form>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
