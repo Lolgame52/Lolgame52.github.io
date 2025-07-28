@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SansGram</title>
+<link rel="stylesheet" href="styles.css" />
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+<div id="auth-container">
+  <h2>Вход в SansGram</h2>
+  <div id="phone-auth">
+    <input type="tel" id="phone-number" placeholder="+7XXXXXXXXXX"/>
+    <button id="send-code">Отправить код</button>
+    <div id="recaptcha-container"></div>
+    <input type="text" id="verification-code" placeholder="Код из SMS"/>
+    <button id="verify-code">Подтвердить</button>
+  </div>
+  <div id="user-info" style="display:none;">
+    <p>Здравствуйте, <span id="user-name"></span></p>
+    <button id="logout">Выйти</button>
+  </div>
+</div>
+
+<div id="chat-container" style="display:none;">
+  <h3>Чаты</h3>
+  <div id="chat-list"></div>
+  <button id="create-chat">Создать чат</button>
+
+  <div id="chat-window" style="display:none;">
+    <h4>Чат: <span id="current-chat-name"></span></h4>
+    <div id="messages"></div>
+    <input type="text" id="message-input" placeholder="Сообщение"/>
+    <button id="send-message">Отправить</button>
+  </div>
+</div>
+
+<script src="./app.js"></script>
+</body>
+</html>

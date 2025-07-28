@@ -1,0 +1,18 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 20px;
+}
+#auth-container, #chat-container {
+  border: 1px solid #ccc;
+  padding: 20px;
+  max-width: 400px;
+}
+#messages {
+  border: 1px solid #999;
+  height: 300px;
+  overflow-y: auto;
+  padding: 10px;
+}
+.message {
+  margin-bottom: 10px;
+}
